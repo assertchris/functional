@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace functional\dependencies;
 
 use Closure;
-use function functional\dependencies\store\contains;
 use function functional\dependencies\store\get;
+use function functional\helpers\error;
+use function functional\helpers\format;
 
-function resolve($name) : Closure {
+function resolve($name) {
     $function = bootstrap(
-        'functional\dependencies\resolve', function(string $name) : Closure {
+        'functional\dependencies\resolve', function(string $name) {
             if ($found = get($name)) {
                 return $found;
             }
 
-            trigger_error(sprintf('"%s" is not registered', $name));
+            error(format('"%s" is not registered', $name));
         }
     );
 

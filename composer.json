@@ -9,7 +9,10 @@
             "functions/dependencies/resolve.php",
             "functions/dependencies/store/get.php",
             "functions/dependencies/store/remove.php",
-            "functions/dependencies/store/set.php"
+            "functions/dependencies/store/set.php",
+            "functions/helpers/debug.php",
+            "functions/helpers/format.php",
+            "functions/helpers/error.php"
         ]
     }
 }
