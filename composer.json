@@ -12,7 +12,9 @@
             "functions/dependencies/store/set.php",
             "functions/helpers/debug.php",
             "functions/helpers/format.php",
-            "functions/helpers/error.php"
+            "functions/helpers/error.php",
+            "functions/structures/base.php",
+            "functions/structures/create.php"
         ]
     }
 }

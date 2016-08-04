@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace functional\dependencies\store;
 
 function set(string $key, $value) {
-    $namespace = 'functional\store';
+    $namespace = 'functional\\store';
 
     if (!isset($GLOBALS[$namespace])) {
         $GLOBALS[$namespace] = [];
