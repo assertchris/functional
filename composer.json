@@ -1,0 +1,15 @@
+{
+    "require": {
+        "php": "^7.1"
+    },
+    "autoload": {
+        "files": [
+            "functions/dependencies/bootstrap.php",
+            "functions/dependencies/register.php",
+            "functions/dependencies/resolve.php",
+            "functions/dependencies/store/get.php",
+            "functions/dependencies/store/remove.php",
+            "functions/dependencies/store/set.php"
+        ]
+    }
+}
