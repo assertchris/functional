@@ -8,6 +8,7 @@ use function functional\helpers\debug;
 use function functional\helpers\format;
 use function functional\structures\create;
 use function functional\structures\person;
+use function functional\type;
 
 create("person", [
     "first_name" => "string",
@@ -35,3 +36,5 @@ set_error_handler(function($error, $message) {
 //     "first_name" => 123,
 //     "middle_name" => "george",
 // ]);
+
+debug(type($chris));

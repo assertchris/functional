@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace functional;
 
-final class ⦗store⦘
+final class __store__
 {
     public static function get(string $namespace, string $key)
     {

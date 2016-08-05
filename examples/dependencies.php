@@ -41,10 +41,30 @@ assert(dependencies\resolve("greet")("chris") == "hello chris");
 
 // trigger a resolution error (to see that error and format work in that context)
 
-set_error_handler(function($error, $message) {
+set_error_handler(function($code, $message) {
     debug(format("error handled successfully: %s\n", $message), $exit = false);
 });
 
 dependencies\resolve("unregistered");
 
-debug("done\n");
+// create a dependency which can be overridden
+
+function emboldener(...$parameters) {
+    $function = dependencies\bootstrap(
+        "custom\\emboldener", function(string $name) {
+            return format("<b>%s</b>", $name);
+        }
+    );
+
+    return $function(...$parameters);
+}
+
+debug(format("name is: %s\n", emboldener("chris")), $exit = false);
+
+// ...but we've changed to using markdown!
+
+dependencies\register("custom\\emboldener", function(string $name) {
+    return format("**%s**", $name);
+});
+
+debug(format("name is: %s\n", emboldener("chris")), $exit = false);

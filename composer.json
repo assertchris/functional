@@ -22,5 +22,8 @@
             "src/type.php",
             "src/structures.php"
         ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
     }
 }

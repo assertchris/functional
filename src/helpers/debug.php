@@ -6,7 +6,7 @@ namespace functional\helpers;
 
 use function functional\dependencies\bootstrap;
 
-function debug($value, $exit = true) {
+function debug(...$parameters) {
     $function = bootstrap(
         "functional\\helpers\\debug", function($value, $exit = true) {
             print_r($value);
@@ -17,5 +17,5 @@ function debug($value, $exit = true) {
         }
     );
 
-    return $function($value, $exit);
+    return $function(...$parameters);
 }

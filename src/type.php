@@ -4,9 +4,10 @@ declare(strict_types = 1);
 
 namespace functional;
 
+use functional\structures\⦗structure⦘;
 use function functional\dependencies\bootstrap;
 
-function type($variable) {
+function type(...$parameters) {
     $function = bootstrap(
         "functional\\type", function($variable) {
             $checks = [
@@ -25,9 +26,13 @@ function type($variable) {
                 }
             }
 
+            if ($variable instanceof ⦗structure⦘) {
+                return $variable->class;
+            }
+
             return "unknown";
         }
     );
 
-    return $function($variable);
+    return $function(...$parameters);
 }

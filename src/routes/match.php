@@ -5,19 +5,19 @@ declare(strict_types = 1);
 namespace functional\routes;
 
 use FastRoute;
-use functional\⦗store⦘;
 use function functional\dependencies\bootstrap;
+use function functional\dependencies\store;
 use function functional\structures\route_match_not_found;
 use function functional\structures\route_match_found;
 use function functional\structures\route_match_method_not_allowed;
 use function functional\helpers\format;
 
-function match($method, $path) {
+function match(...$parameters) {
     $function = bootstrap(
         "functional\\routes\\match", function(string $method, string $path) {
             $namespace = "functional\\routes";
 
-            $routes = ⦗store⦘::all($namespace);
+            $routes = store\all($namespace);
 
             $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $collector) use ($routes) {
                 foreach ($routes as $route) {
@@ -60,5 +60,5 @@ function match($method, $path) {
         }
     );
 
-    return $function($method, $path);
+    return $function(...$parameters);
 }

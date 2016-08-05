@@ -12,12 +12,17 @@ abstract class ⦗structure⦘ {
     /**
      * @var array
      */
-    protected $definition = [];
+    protected $⦗definition⦘ = [];
 
     /**
      * @var array
      */
-    protected $data = [];
+    protected $⦗data⦘ = [];
+
+    /**
+     * @var array
+     */
+    protected $⦗name⦘ = "structure";
 
     /**
      * @param array $data
@@ -28,9 +33,9 @@ abstract class ⦗structure⦘ {
             $this->__set($key, $value);
         }
 
-        foreach ($this->definition as $key => $value) {
-            if ($this->definition[$key] != "mixed" && !isset($this->data[$key])) {
-                error(format('"%s" should be "%s"', $key, $this->definition[$key]), false);
+        foreach ($this->⦗definition⦘ as $key => $value) {
+            if ($this->⦗definition⦘[$key] != "mixed" && !isset($this->⦗data⦘[$key])) {
+                error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]), false);
             }
         }
     }
@@ -42,11 +47,15 @@ abstract class ⦗structure⦘ {
      */
     public function __get($key)
     {
-        if (!isset($this->definition[$key])) {
-            error(format('"%s" is not part of "%s"', $key, static::class));
+        if ($key == "class") {
+            return $this->⦗name⦘;
         }
 
-        return $this->data[$key];
+        if (!isset($this->⦗definition⦘[$key])) {
+            error(format('"%s" is not part of "%s"', $key, $this->⦗class⦘));
+        }
+
+        return $this->⦗data⦘[$key];
     }
 
     /**
@@ -55,14 +64,14 @@ abstract class ⦗structure⦘ {
      */
     public function __set($key, $value)
     {
-        if (!isset($this->definition[$key])) {
-            error(format('"%s" is not part of "%s"', $key, static::class));
+        if (!isset($this->⦗definition⦘[$key])) {
+            error(format('"%s" is not part of "%s"', $key, $this->⦗class⦘));
         }
 
-        if ($this->definition[$key] != "mixed" && type($value) != $this->definition[$key]) {
-            error(format('"%s" should be "%s"', $key, $this->definition[$key]));
+        if ($this->⦗definition⦘[$key] != "mixed" && type($value) != $this->⦗definition⦘[$key]) {
+            error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]));
         }
 
-        $this->data[$key] = $value;
+        $this->⦗data⦘[$key] = $value;
     }
 }

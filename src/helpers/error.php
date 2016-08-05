@@ -6,7 +6,7 @@ namespace functional\helpers;
 
 use function functional\dependencies\bootstrap;
 
-function error($message, $exit = true, $type = E_USER_NOTICE) {
+function error(...$parameters) {
     $function = bootstrap(
         "functional\\helpers\\error", function(string $message, $exit = true, $type = E_USER_NOTICE) {
             trigger_error($message, $type);
@@ -17,5 +17,5 @@ function error($message, $exit = true, $type = E_USER_NOTICE) {
         }
     );
 
-    return $function($message, $exit, $type);
+    return $function(...$parameters);
 }

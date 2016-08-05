@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace functional\dependencies\store;
 
-use functional\⦗store⦘;
+use functional\__store__;
 
 function set(string $key, $value) {
     $namespace = "functional\\dependencies";
 
-    return ⦗store⦘::set($namespace, $key, $value);
+    return __store__::set($namespace, $key, $value);
 }
