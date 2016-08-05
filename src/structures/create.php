@@ -10,15 +10,15 @@ use function functional\helpers\format;
 
 function create($name, $definition) {
     $function = bootstrap(
-        'functional\\structures\\create', function (string $name, array $definition) {
-            $namespace = 'functional\\structures';
+        "functional\\structures\\create", function (string $name, array $definition) {
+            $namespace = "functional\\structures";
 
-            if (class_exists(format('%s\\%s', $namespace, $name))) {
+            if (class_exists(format("%s\\%s", $namespace, $name))) {
                 error(format('"%s" already exists'));
             }
 
             $code = format(
-                'namespace %s; final class ⦗%s⦘ extends ⦗base⦘ { protected $definition = %s; } function %s(array $data = []) { return new ⦗%s⦘($data); }',
+                'namespace %s; final class ⦗%s⦘ extends ⦗structure⦘ { protected $definition = %s; } function %s(array $data = []) { return new ⦗%s⦘($data); }',
                 $namespace, $name, var_export($definition, true), $name, $name
             );
 

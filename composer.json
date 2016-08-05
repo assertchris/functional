@@ -1,20 +1,26 @@
 {
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "nikic/fast-route": "^1.0"
     },
     "autoload": {
         "files": [
-            "functions/dependencies/bootstrap.php",
-            "functions/dependencies/register.php",
-            "functions/dependencies/resolve.php",
-            "functions/dependencies/store/get.php",
-            "functions/dependencies/store/remove.php",
-            "functions/dependencies/store/set.php",
-            "functions/helpers/debug.php",
-            "functions/helpers/format.php",
-            "functions/helpers/error.php",
-            "functions/structures/base.php",
-            "functions/structures/create.php"
+            "src/dependencies/bootstrap.php",
+            "src/dependencies/register.php",
+            "src/dependencies/resolve.php",
+            "src/dependencies/store/get.php",
+            "src/dependencies/store/remove.php",
+            "src/dependencies/store/set.php",
+            "src/helpers/debug.php",
+            "src/helpers/format.php",
+            "src/helpers/error.php",
+            "src/routes/get.php",
+            "src/routes/match.php",
+            "src/structures/create.php",
+            "src/structures/structure.php",
+            "src/store.php",
+            "src/type.php",
+            "src/structures.php"
         ]
     }
 }

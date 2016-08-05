@@ -4,10 +4,11 @@ declare(strict_types = 1);
 
 namespace functional\structures;
 
+use function functional\type;
 use function functional\helpers\error;
 use function functional\helpers\format;
 
-abstract class ⦗base⦘ {
+abstract class ⦗structure⦘ {
     /**
      * @var array
      */
@@ -28,7 +29,7 @@ abstract class ⦗base⦘ {
         }
 
         foreach ($this->definition as $key => $value) {
-            if ($this->definition[$key] == "mixed" || !isset($this->data[$key])) {
+            if ($this->definition[$key] != "mixed" && !isset($this->data[$key])) {
                 error(format('"%s" should be "%s"', $key, $this->definition[$key]), false);
             }
         }
@@ -58,7 +59,7 @@ abstract class ⦗base⦘ {
             error(format('"%s" is not part of "%s"', $key, static::class));
         }
 
-        if ($this->definition[$key] == "mixed" || gettype($value) != $this->definition[$key]) {
+        if ($this->definition[$key] != "mixed" && type($value) != $this->definition[$key]) {
             error(format('"%s" should be "%s"', $key, $this->definition[$key]));
         }
 

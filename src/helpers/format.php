@@ -8,7 +8,7 @@ use function functional\dependencies\bootstrap;
 
 function format($template, ...$parameters) {
     $function = bootstrap(
-        'functional\\helpers\\format', function(string $template, ...$parameters) {
+        "functional\\helpers\\format", function(string $template, ...$parameters) {
             return sprintf($template, ...$parameters);
         }
     );

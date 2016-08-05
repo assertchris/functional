@@ -11,7 +11,7 @@ use function functional\helpers\format;
 
 function register(string $key, callable $factory = null) {
     $function = bootstrap(
-        'functional\\dependencies\\register', function(string $key, callable $factory = null) {
+        "functional\\dependencies\\register", function(string $key, callable $factory = null) {
             if (!$factory) {
                 $factory = $key;
             }
