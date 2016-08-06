@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace functional\dependencies\store;
 
-use functional\__store__;
+use functional\⦗store⦘;
 
 function get(string $key = null) {
     $namespace = "functional\\dependencies";
 
-    if (!$key) {
-        return __store__::all($namespace);
+    if ($key === null) {
+        return ⦗store⦘::all($namespace);
     }
 
-    return __store__::get($namespace, $key);
+    return ⦗store⦘::get($namespace, $key);
 }

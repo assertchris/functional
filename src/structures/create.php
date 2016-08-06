@@ -10,7 +10,7 @@ use function functional\helpers\format;
 
 function create(...$parameters) {
     $function = bootstrap(
-        "functional\\structures\\create", function (string $name, array $definition) {
+        "functional\\structures\\create", function(string $name, array $definition) {
             $namespace = "functional\\structures";
 
             if (class_exists(format("%s\\⦗%s⦘", $namespace, $name))) {

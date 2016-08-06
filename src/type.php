@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace functional;
 
 use functional\structures\⦗structure⦘;
+
 use function functional\dependencies\bootstrap;
 
 function type(...$parameters) {

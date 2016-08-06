@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-require __DIR__ . "/../../vendor/autoload.php";
+require __DIR__ . "/../vendor/autoload.php";
 
 use function functional\helpers\debug;
 use function functional\helpers\format;
@@ -21,8 +21,8 @@ $chris = person([
 ]);
 
 debug($chris, false);
-debug(format("%s\n", $chris->first_name), false);
-debug(format("%s\n", $chris->last_name), false);
+debug(format("first_name: %s\n", $chris->first_name), $exit = false);
+debug(format("last_name: %s\n", $chris->last_name), $exit = false);
 
 // check for validation errors
 
@@ -30,11 +30,21 @@ set_error_handler(function($error, $message) {
     debug(format("error handled successfully: %s\n", $message), $exit = false);
 });
 
-// person();
-//
-// person([
-//     "first_name" => 123,
-//     "middle_name" => "george",
-// ]);
+person();
 
-debug(type($chris));
+person([
+    "first_name" => 123,
+    "middle_name" => "george",
+]);
+
+$chris->middle_name;
+
+// check for the type of this structure
+
+debug(format("type: %s\n", type($chris)), $exit = false);
+
+// check setting values
+
+$chris->first_name = "christopher";
+
+debug(format("modified first_name: %s\n", $chris->first_name), $exit = false);

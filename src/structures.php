@@ -8,14 +8,14 @@ use function functional\structures\create;
 
 create("route", [
     "method" => "string",
-    "path" => "string",
+    "pattern" => "string",
     "handler" => "callable",
     "options" => "array",
 ]);
 
 create("route_match_not_found", [
     "method" => "string",
-    "path" => "string",
+    "pattern" => "string",
 ]);
 
 create("route_match_found", [

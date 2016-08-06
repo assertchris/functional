@@ -4,21 +4,30 @@ declare(strict_types = 1);
 
 namespace functional;
 
-final class __store__
+final class ⦗store⦘
 {
+    private static $data = [];
+
     public static function get(string $namespace, string $key)
     {
         if (self::exists($namespace, $key)) {
-            return $GLOBALS[$namespace][$key];
+            return self::$data[$namespace][$key];
         }
 
         return null;
     }
 
+    public static function exists(string $namespace, string $key)
+    {
+        self::init($namespace);
+
+        return isset(self::$data[$namespace][$key]);
+    }
+
     private static function init(string $namespace)
     {
-        if (!isset($GLOBALS[$namespace])) {
-            $GLOBALS[$namespace] = [];
+        if (!isset(self::$data[$namespace])) {
+            self::$data[$namespace] = [];
         }
     }
 
@@ -26,27 +35,20 @@ final class __store__
     {
         self::init($namespace);
 
-        return $GLOBALS[$namespace];
+        return self::$data[$namespace];
     }
 
     public static function set(string $namespace, string $key, $value)
     {
         self::init($namespace);
 
-        $GLOBALS[$namespace][$key] = $value;
-    }
-
-    public static function exists(string $namespace, string $key)
-    {
-        self::init($namespace);
-
-        return isset($GLOBALS[$namespace][$key]);
+        self::$data[$namespace][$key] = $value;
     }
 
     public static function remove(string $namespace, string $key)
     {
         self::init($namespace);
 
-        unset($GLOBALS[$namespace][$key]);
+        unset(self::$data[$namespace][$key]);
     }
 }

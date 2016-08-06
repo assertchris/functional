@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace functional\dependencies;
 
 use Closure;
-use function functional\dependencies\store\set;
+
+use functional\dependencies\store;
+
 use function functional\helpers\error;
 use function functional\helpers\format;
 
@@ -16,7 +18,7 @@ function register(...$parameters) {
                 $factory = $key;
             }
 
-            set($key, Closure::fromCallable($factory));
+            store\set($key, Closure::fromCallable($factory));
         }
     );
 

@@ -33,11 +33,18 @@ abstract class ⦗structure⦘ {
             $this->__set($key, $value);
         }
 
+        assert($this->⦗check_construct⦘());
+    }
+
+    private function ⦗check_construct⦘() : bool
+    {
         foreach ($this->⦗definition⦘ as $key => $value) {
             if ($this->⦗definition⦘[$key] != "mixed" && !isset($this->⦗data⦘[$key])) {
                 error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]), false);
             }
         }
+
+        return true;
     }
 
     /**
@@ -51,11 +58,23 @@ abstract class ⦗structure⦘ {
             return $this->⦗name⦘;
         }
 
-        if (!isset($this->⦗definition⦘[$key])) {
-            error(format('"%s" is not part of "%s"', $key, $this->⦗class⦘));
+        assert($this->⦗check_get⦘($key), format('getting "%s"', $key));
+
+        if (isset($this->⦗data⦘[$key])) {
+            return $this->⦗data⦘[$key];
         }
 
-        return $this->⦗data⦘[$key];
+        return null;
+    }
+
+    private function ⦗check_get⦘(string $key) : bool
+    {
+        if (!isset($this->⦗definition⦘[$key])) {
+            error(format('"%s" is not part of "%s"', $key, $this->⦗name⦘), false);
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -64,14 +83,23 @@ abstract class ⦗structure⦘ {
      */
     public function __set($key, $value)
     {
+        assert($this->⦗check_set⦘($key, $value), format('setting "%s"', $key));
+
+        $this->⦗data⦘[$key] = $value;
+    }
+
+    private function ⦗check_set⦘(string $key, $value) : bool
+    {
         if (!isset($this->⦗definition⦘[$key])) {
-            error(format('"%s" is not part of "%s"', $key, $this->⦗class⦘));
+            error(format('"%s" is not part of "%s"', $key, $this->⦗name⦘), false);
+            return false;
         }
 
         if ($this->⦗definition⦘[$key] != "mixed" && type($value) != $this->⦗definition⦘[$key]) {
-            error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]));
+            error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]), false);
+            return false;
         }
 
-        $this->⦗data⦘[$key] = $value;
+        return true;
     }
 }
