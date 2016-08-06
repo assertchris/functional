@@ -6,8 +6,6 @@ namespace functional\routes;
 
 use FastRoute;
 
-use functional\⦗store⦘;
-
 use function functional\dependencies\bootstrap;
 use function functional\structures\route_match_not_found;
 use function functional\structures\route_match_found;
@@ -17,15 +15,28 @@ use function functional\helpers\format;
 function match(...$parameters) {
     $function = bootstrap(
         "functional\\routes\\match", function(string $method, string $pattern) {
-            $namespace = "functional\\routes";
+            $routes = store\all();
 
-            $routes = ⦗store⦘::all($namespace);
+            $function = bootstrap(
+                "unmentionables\\fastroute\\dispatcher",
+                function() use ($routes) {
+                    static $dispatcher;
 
-            $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $collector) use ($routes) {
-                foreach ($routes as $route) {
-                    $collector->addRoute($route->method, $route->pattern, $route->handler);
+                    if ($dispatcher) {
+                        return $dispatcher;
+                    }
+
+                    $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $collector) use ($routes) {
+                        foreach ($routes as $route) {
+                            $collector->addRoute($route->method, $route->pattern, $route->handler);
+                        }
+                    });
+
+                    return $dispatcher;
                 }
-            });
+            );
+
+            $dispatcher = $function();
 
             $result = $dispatcher->dispatch($method, $pattern);
 

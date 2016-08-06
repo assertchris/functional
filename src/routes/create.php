@@ -4,16 +4,15 @@ declare(strict_types = 1);
 
 namespace functional\routes;
 
-use functional\⦗store⦘;
-
 use function functional\dependencies\bootstrap;
+use function functional\dependencies\store\remove;
 use function functional\structures\route;
 use function functional\helpers\format;
 
 function create(...$parameters) {
     $function = bootstrap(
         "functional\\routes\\create", function(string $method, string $pattern, callable $handler, array $options = null) {
-            $namespace = "functional\\routes";
+            remove("unmentionables\\fastroute\\dispatcher");
 
             if (!$options) {
                 $options = [];
@@ -26,7 +25,7 @@ function create(...$parameters) {
                 "options" => $options,
             ]);
 
-            ⦗store⦘::set($namespace, format("%s:%s", $method, $pattern), $route);
+            store\set(format("%s:%s", $method, $pattern), $route);
         }
     );
 

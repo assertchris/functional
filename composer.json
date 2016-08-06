@@ -21,6 +21,8 @@
             "src/routes/match.php",
             "src/routes/patch.php",
             "src/routes/post.php",
+            "src/routes/store/all.php",
+            "src/routes/store/set.php",
             "src/structures/create.php",
             "src/structures/structure.php",
             "src/store.php",
