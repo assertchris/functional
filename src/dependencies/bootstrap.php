@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace functional\dependencies;
 
 use Closure;
-
 use functional\dependencies\store;
 
 function bootstrap(string $key, callable $factory) : Closure {

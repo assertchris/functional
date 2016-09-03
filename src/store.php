@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace functional;
 
-final class ⦗store⦘
+final class ƒstore
 {
     private static $data = [];
 

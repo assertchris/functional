@@ -5,101 +5,83 @@ declare(strict_types = 1);
 namespace functional\structures;
 
 use function functional\type;
-use function functional\helpers\error;
-use function functional\helpers\format;
 
-abstract class ⦗structure⦘ {
+abstract class ƒstructure {
     /**
      * @var array
      */
-    protected $⦗definition⦘ = [];
-
-    /**
-     * @var array
-     */
-    protected $⦗data⦘ = [];
+    protected $ƒdefinition = [];
 
     /**
      * @var array
      */
-    protected $⦗name⦘ = "structure";
+    protected $ƒdata = [];
 
     /**
-     * @param array $data
+     * @var array
      */
+    protected $ƒname = 'structure';
+
     public function __construct(array $data)
     {
-        foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+        foreach ($data as $property => $value) {
+            $this->$property = $value;
         }
 
-        assert($this->⦗check_construct⦘());
+        assert($this->ƒthrow_if_not_all_set());
     }
 
-    private function ⦗check_construct⦘() : bool
+    private function ƒthrow_if_not_all_set() : bool
     {
-        foreach ($this->⦗definition⦘ as $key => $value) {
-            if ($this->⦗definition⦘[$key] != "mixed" && !isset($this->⦗data⦘[$key])) {
-                error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]), false);
+        foreach ($this->ƒdefinition as $property => $type) {
+            if ($type !== 'mixed' && !isset($this->ƒdata[$property])) {
+                throw new property_is_not_set($property, $type, $this->ƒname);
             }
         }
 
         return true;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function __get($key)
+    public function __set($property, $value)
     {
-        if ($key == "class") {
-            return $this->⦗name⦘;
+        assert($this->ƒthrow_if_not_defined($property, $value));
+        assert($this->ƒthrow_if_wrong_type($property, $value));
+
+        $this->ƒdata[$property] = $value;
+    }
+
+    private function ƒthrow_if_not_defined(string $property) : bool
+    {
+        if (!isset($this->ƒdefinition[$property])) {
+            throw new property_is_not_defined($property, $this->ƒname);
         }
 
-        assert($this->⦗check_get⦘($key), format('getting "%s"', $key));
+        return true;
+    }
 
-        if (isset($this->⦗data⦘[$key])) {
-            return $this->⦗data⦘[$key];
+    private function ƒthrow_if_wrong_type(string $property, $value) : bool
+    {
+        $type = $this->ƒdefinition[$property];
+
+        if ($type !== 'mixed' && $type !== type($value)) {
+            throw new value_is_wrong_type($property, $type, type($value), $this->ƒname);
+        }
+
+        return true;
+    }
+
+    public function __get($property)
+    {
+        if ($property === 'class') {
+            return $this->ƒname;
+        }
+
+        assert($this->ƒthrow_if_not_defined($property));
+
+        if (isset($this->ƒdata[$property])) {
+            return $this->ƒdata[$property];
         }
 
         return null;
-    }
-
-    private function ⦗check_get⦘(string $key) : bool
-    {
-        if (!isset($this->⦗definition⦘[$key])) {
-            error(format('"%s" is not part of "%s"', $key, $this->⦗name⦘), false);
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     */
-    public function __set($key, $value)
-    {
-        assert($this->⦗check_set⦘($key, $value), format('setting "%s"', $key));
-
-        $this->⦗data⦘[$key] = $value;
-    }
-
-    private function ⦗check_set⦘(string $key, $value) : bool
-    {
-        if (!isset($this->⦗definition⦘[$key])) {
-            error(format('"%s" is not part of "%s"', $key, $this->⦗name⦘), false);
-            return false;
-        }
-
-        if ($this->⦗definition⦘[$key] != "mixed" && type($value) != $this->⦗definition⦘[$key]) {
-            error(format('"%s" should be "%s"', $key, $this->⦗definition⦘[$key]), false);
-            return false;
-        }
-
-        return true;
     }
 }

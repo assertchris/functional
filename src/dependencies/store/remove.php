@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace functional\dependencies\store;
 
-use functional\⦗store⦘;
+use functional\ƒstore;
 
 function remove(string $key) {
-    $namespace = "functional\\dependencies";
+    $namespace = 'functional\dependencies';
 
-    ⦗store⦘::remove($namespace, $key);
+    ƒstore::remove($namespace, $key);
 }

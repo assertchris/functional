@@ -11,23 +11,14 @@
             "src/dependencies/store/get.php",
             "src/dependencies/store/remove.php",
             "src/dependencies/store/set.php",
-            "src/helpers/debug.php",
-            "src/helpers/format.php",
-            "src/helpers/error.php",
-            "src/routes/create.php",
-            "src/routes/delete.php",
-            "src/routes/get.php",
-            "src/routes/head.php",
-            "src/routes/match.php",
-            "src/routes/patch.php",
-            "src/routes/post.php",
-            "src/routes/store/all.php",
-            "src/routes/store/set.php",
             "src/structures/create.php",
+            "src/structures/property_is_not_defined.php",
+            "src/structures/property_is_not_set.php",
+            "src/structures/structure_already_exists.php",
             "src/structures/structure.php",
+            "src/structures/value_is_wrong_type.php",
             "src/store.php",
-            "src/type.php",
-            "src/structures.php"
+            "src/type.php"
         ]
     },
     "require-dev": {

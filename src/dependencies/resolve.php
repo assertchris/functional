@@ -5,21 +5,19 @@ declare(strict_types = 1);
 namespace functional\dependencies;
 
 use Closure;
-
 use functional\dependencies\store;
 
-use function functional\helpers\error;
-use function functional\helpers\format;
+function ƒresolve(string $name) {
+    if ($found = store\get($name)) {
+        return $found;
+    }
+
+    throw new dependency_is_not_registered($name);
+}
 
 function resolve(...$parameters) {
     $function = bootstrap(
-        "functional\\dependencies\\resolve", function(string $name) {
-            if ($found = store\get($name)) {
-                return $found;
-            }
-
-            error(format('"%s" is not registered', $name), false);
-        }
+        'functional\dependencies\resolve', 'functional\dependencies\ƒresolve'
     );
 
     return $function(...$parameters);

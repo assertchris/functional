@@ -2,49 +2,69 @@
 
 declare(strict_types = 1);
 
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . '/../vendor/autoload.php';
 
-use function functional\helpers\debug;
-use function functional\helpers\format;
+use functional\structures\property_is_not_defined;
+use functional\structures\property_is_not_set;
+use functional\structures\structure_already_exists;
+use functional\structures\value_is_wrong_type;
 use function functional\structures\create;
 use function functional\structures\person;
 use function functional\type;
 
-create("person", [
-    "first_name" => "string",
-    "last_name" => "string",
+function debug(...$message) {
+    print join(' ', $message) . "\n";
+}
+
+create('person', [
+    'first_name' => 'string',
+    'last_name' => 'string',
 ]);
+
+try {
+    create('person', []);
+}
+catch (structure_already_exists $exception) {
+    debug($exception->getMessage());
+}
 
 $chris = person([
-    "first_name" => "chris",
-    "last_name" => "pitt",
+    'first_name' => 'chris',
+    'last_name' => 'pitt',
 ]);
 
-debug($chris, false);
-debug(format("first_name: %s\n", $chris->first_name), $exit = false);
-debug(format("last_name: %s\n", $chris->last_name), $exit = false);
+debug('first_name →', $chris->first_name);
+debug('last_name →', $chris->last_name);
 
-// check for validation errors
+try {
+    person();
+}
+catch (property_is_not_set $exception) {
+    debug($exception->getMessage());
+}
 
-set_error_handler(function($error, $message) {
-    debug(format("error handled successfully: %s\n", $message), $exit = false);
-});
+try {
+    person([
+        'first_name' => 123,
+        'middle_name' => 'george',
+    ]);
+}
+catch (value_is_wrong_type $exception) {
+    debug($exception->getMessage());
+}
+catch (property_is_not_defined $exception) {
+    debug($exception->getMessage());
+}
 
-person();
+try {
+    $chris->middle_name;
+}
+catch (property_is_not_defined $exception) {
+    debug($exception->getMessage());
+}
 
-person([
-    "first_name" => 123,
-    "middle_name" => "george",
-]);
+debug('type →', type($chris));
 
-$chris->middle_name;
+$chris->first_name = 'christopher';
 
-// check for the type of this structure
-
-debug(format("type: %s\n", type($chris)), $exit = false);
-
-// check setting values
-
-$chris->first_name = "christopher";
-
-debug(format("modified first_name: %s\n", $chris->first_name), $exit = false);
+debug('first_name →',  $chris->first_name);
