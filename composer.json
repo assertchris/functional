@@ -1,4 +1,5 @@
 {
+    "name": "functional/core",
     "require": {
         "php": "^7.1"
     },
