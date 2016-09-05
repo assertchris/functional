@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace functional;
+namespace functional\core;
 
 final class ƒstore
 {

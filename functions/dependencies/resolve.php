@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace functional\dependencies;
+namespace functional\core\dependencies;
 
 use Closure;
-use functional\dependencies\store;
+use functional\core\dependencies\store;
 
 function ƒresolve(string $name) {
     if ($found = store\get($name)) {
@@ -17,7 +17,7 @@ function ƒresolve(string $name) {
 
 function resolve(...$parameters) {
     $function = bootstrap(
-        'functional\dependencies\resolve', 'functional\dependencies\ƒresolve'
+        'functional\core\dependencies\resolve', 'functional\core\dependencies\ƒresolve'
     );
 
     return $function(...$parameters);

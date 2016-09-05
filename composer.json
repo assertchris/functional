@@ -5,20 +5,20 @@
     },
     "autoload": {
         "files": [
-            "src/dependencies/bootstrap.php",
-            "src/dependencies/register.php",
-            "src/dependencies/resolve.php",
-            "src/dependencies/store/get.php",
-            "src/dependencies/store/remove.php",
-            "src/dependencies/store/set.php",
-            "src/structures/create.php",
-            "src/structures/property_is_not_defined.php",
-            "src/structures/property_is_not_set.php",
-            "src/structures/structure_already_exists.php",
-            "src/structures/structure.php",
-            "src/structures/value_is_wrong_type.php",
-            "src/store.php",
-            "src/type.php"
+            "functions/dependencies/bootstrap.php",
+            "functions/dependencies/register.php",
+            "functions/dependencies/resolve.php",
+            "functions/dependencies/store/get.php",
+            "functions/dependencies/store/remove.php",
+            "functions/dependencies/store/set.php",
+            "functions/structures/create.php",
+            "functions/structures/property_is_not_defined.php",
+            "functions/structures/property_is_not_set.php",
+            "functions/structures/structure_already_exists.php",
+            "functions/structures/structure.php",
+            "functions/structures/value_is_wrong_type.php",
+            "functions/store.php",
+            "functions/type.php"
         ]
     },
     "require-dev": {

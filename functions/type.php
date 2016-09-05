@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace functional;
+namespace functional\core;
 
-use functional\structures\ƒstructure;
-use function functional\dependencies\bootstrap;
+use functional\core\structures\ƒstructure;
+use function functional\core\dependencies\bootstrap;
 
 function ƒtype($variable) {
     $checks = [
@@ -33,7 +33,7 @@ function ƒtype($variable) {
 
 function type(...$parameters) {
     $function = bootstrap(
-        'functional\type', 'functional\ƒtype'
+        'functional\core\type', 'functional\core\ƒtype'
     );
 
     return $function(...$parameters);

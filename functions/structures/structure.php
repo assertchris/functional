@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace functional\structures;
+namespace functional\core\structures;
 
-use function functional\type;
+use function functional\core\type;
 
 abstract class ƒstructure {
     /**

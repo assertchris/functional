@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace functional\structures;
+namespace functional\core\structures;
 
-use function functional\dependencies\bootstrap;
+use function functional\core\dependencies\bootstrap;
 
 function ƒcreate(string $name, array $definition) {
-    $namespace = 'functional\structures';
+    $namespace = 'functional\core\structures';
 
     if (class_exists($namespace . '\ƒ' . $name)) {
         throw new structure_already_exists($name);
@@ -34,7 +34,7 @@ function ƒcreate(string $name, array $definition) {
 
 function create(...$parameters) {
     $function = bootstrap(
-        'functional\structures\create', 'functional\structures\ƒcreate'
+        'functional\core\structures\create', 'functional\core\structures\ƒcreate'
     );
 
     return $function(...$parameters);

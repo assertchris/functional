@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace functional\dependencies;
+namespace functional\core\dependencies;
 
 use Closure;
-use functional\dependencies\store;
+use functional\core\dependencies\store;
 
 function ƒregister(string $key, callable $factory = null) {
     if (!$factory) {
@@ -17,7 +17,7 @@ function ƒregister(string $key, callable $factory = null) {
 
 function register(...$parameters) {
     $function = bootstrap(
-        'functional\dependencies\register', 'functional\dependencies\ƒregister'
+        'functional\core\dependencies\register', 'functional\core\dependencies\ƒregister'
     );
 
     return $function(...$parameters);

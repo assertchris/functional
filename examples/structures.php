@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use functional\structures\property_is_not_defined;
-use functional\structures\property_is_not_set;
-use functional\structures\structure_already_exists;
-use functional\structures\value_is_wrong_type;
-use function functional\structures\create;
-use function functional\structures\person;
-use function functional\type;
+use functional\core\structures\property_is_not_defined;
+use functional\core\structures\property_is_not_set;
+use functional\core\structures\structure_already_exists;
+use functional\core\structures\value_is_wrong_type;
+use function functional\core\structures\create;
+use function functional\core\structures\person;
+use function functional\core\type;
 
 function debug(...$message) {
     print join(' ', $message) . "\n";

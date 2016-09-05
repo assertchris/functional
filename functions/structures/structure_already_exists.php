@@ -2,15 +2,15 @@
 
 declare(strict_types = 1);
 
-namespace functional\structures;
+namespace functional\core\structures;
 
 use Exception;
 
-final class dependency_is_not_registered extends Exception
+final class structure_already_exists extends Exception
 {
     public function __construct(string $name)
     {
-        $message = $name . ' is not registered';
+        $message = $name . ' already exists';
 
         parent::__construct($message);
     }
